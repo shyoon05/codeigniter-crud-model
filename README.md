@@ -17,7 +17,7 @@ core 폴더를 당신의 application 폴더 아래에 복사하세요.
 Sample
 ------
 ```php
-class post_model extends MY_Model
+class sample_model extends MY_Model
 {
 	protected $table_name = 'posts';
 	protected $primary_key = 'post_id';
@@ -93,7 +93,7 @@ Advanced sample
 ---------------
 
 ```php
-class post_model extends MY_Model
+class sample_model extends MY_Model
 {
 	protected $table_name = 'posts';
 	protected $primary_key = 'post_id';
