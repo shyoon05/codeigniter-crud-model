@@ -18,10 +18,12 @@ class MY_Model extends CI_Model
 	protected $soft_delete_key = '';  // 예: is_delete
 		
 	/**
-	 * 생성자 필드명을 입력하세요. 
+	 * 생성자, 수정자  필드명을 입력하세요. 
 	 * 빈칸이면 이용하지 않습니다.	 	 
 	 */
 	protected $creator_key = '';  // 예: creator_user_id
+	protected $modifier_key = '';  // 예: modifier_user_id
+	protected $created_key = 'created';	
 
 	function __construct()
 	{
@@ -123,7 +125,7 @@ class MY_Model extends CI_Model
 		//로그
 		if(method_exists($this,'_create_set')) $this->_create_set($p);
 		if(method_exists($this,'_set')) $this->_set($p);
-		$this->db->set('created','NOW()',false);		
+		$this->db->set($this->created_key,'NOW()',false);		
 		if($this->creator_key)
 		{
 			$this->db->set($this->creator_key, $p[$this->creator_key]);
@@ -148,10 +150,7 @@ class MY_Model extends CI_Model
 	public function update($id,$p)
 	{
 		if(method_exists($this,'_before_update')) $this->_before_update($id,$p);
-
-		//현재사용자
-		$userinfo = $this->load->get_var('userinfo');
-
+		
 		//로그
 		$row = $this->read($id);
 
